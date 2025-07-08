@@ -1,0 +1,9 @@
+[submodule "devvault"]
+	path = devvault
+	url = https://github.com/JanKuchnia/dev-vault.git
+[submodule "SkillSync"]
+	path = SkillSync
+	url = https://github.com/JanKuchnia/skill-sync.git
+[submodule "HabitForge"]
+	path = HabitForge
+	url = https://github.com/JanKuchnia/habit-forge.git
