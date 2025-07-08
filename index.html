@@ -168,7 +168,7 @@
                 <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"></div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
                 <!-- Project 1 -->
                 <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp cursor-pointer" data-project="SkillSync/index.html">
                     <div class="h-48 bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
@@ -317,11 +317,11 @@
     </section>
 
     <!-- Modal Overlay for Project Preview -->
-    <div id="project-modal" class="modal-overlay" style="display:none;">
+    <div id="project-modal" class="modal-overlay" style="display:none;" aria-modal="true" role="dialog" aria-labelledby="modal-title">
         <div class="modal-backdrop"></div>
         <div class="modal-window glass">
             <button class="modal-close" aria-label="Close">&times;</button>
-            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen title="Project Preview"></iframe>
         </div>
     </div>
 
@@ -432,23 +432,57 @@
             observer.observe(el);
         });
 
-        // Modal window logic for project previews
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', function(e) {
+        // Modal window logic for project previews (reworked)
+        const projectsGrid = document.getElementById('projects-grid');
+        const modal = document.getElementById('project-modal');
+        const modalIframe = document.getElementById('modal-iframe');
+        const modalClose = document.querySelector('.modal-close');
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+        let lastFocusedElement = null;
+
+        // Open modal helper
+        function openModal(src) {
+            if (!src) return;
+            lastFocusedElement = document.activeElement;
+            modalIframe.src = src;
+            modal.style.display = 'block';
+            modal.setAttribute('aria-hidden', 'false');
+            modalClose.focus();
+        }
+        // Close modal helper
+        function closeModal() {
+            modal.style.display = 'none';
+            modalIframe.src = '';
+            modal.setAttribute('aria-hidden', 'true');
+            if (lastFocusedElement) lastFocusedElement.focus();
+        }
+        // Event delegation for click
+        projectsGrid.addEventListener('click', function(e) {
+            let card = e.target.closest('.project-card');
+            if (card && projectsGrid.contains(card)) {
                 let src = card.getAttribute('data-project');
-                if (src) {
-                    document.getElementById('modal-iframe').src = src;
-                    document.getElementById('project-modal').style.display = 'block';
+                openModal(src);
+            }
+        });
+        // Keyboard accessibility for cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.setAttribute('tabindex', '0');
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    let src = card.getAttribute('data-project');
+                    openModal(src);
                 }
             });
         });
-        document.querySelector('.modal-close').addEventListener('click', function() {
-            document.getElementById('project-modal').style.display = 'none';
-            document.getElementById('modal-iframe').src = '';
-        });
-        document.querySelector('.modal-backdrop').addEventListener('click', function() {
-            document.getElementById('project-modal').style.display = 'none';
-            document.getElementById('modal-iframe').src = '';
+        // Close modal on close button or backdrop
+        modalClose.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (modal.style.display === 'block' && e.key === 'Escape') {
+                closeModal();
+            }
         });
     </script>
 </body>
