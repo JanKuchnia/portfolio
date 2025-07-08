@@ -151,9 +151,9 @@
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
             border: 1px solid rgba(255,255,255,0.18);
             padding: 0;
-            max-width: 900px;
-            width: 90vw;
-            max-height: 80vh;
+            max-width: 1200px;
+            width: 98vw;
+            max-height: 90vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -161,9 +161,9 @@
         }
         @media (max-width: 600px) {
             .modal-window {
-                max-width: 98vw;
-                width: 98vw;
-                max-height: 90vh;
+                max-width: 100vw;
+                width: 100vw;
+                max-height: 98vh;
             }
         }
         .modal-close {
@@ -180,6 +180,10 @@
             cursor: pointer;
             z-index: 2;
             transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
         .modal-close:hover, .modal-close:focus {
             background: rgba(59,130,246,0.15);
@@ -187,14 +191,14 @@
         }
         .modal-window iframe {
             width: 100%;
-            height: 70vh;
+            height: 80vh;
             border: none;
             border-radius: 0 0 1.25rem 1.25rem;
             background: #f8fafc;
         }
         @media (max-width: 600px) {
             .modal-window iframe {
-                height: 55vh;
+                height: 65vh;
             }
         }
         @keyframes modalIn {
