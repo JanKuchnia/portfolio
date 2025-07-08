@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fullstack Developer Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="container">
+    <section class="projects-section">
+      <h1 class="section-title">Featured Projects</h1>
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card glass" data-project="../skill sync/index.html">
+          <div class="project-img-placeholder">
+            <span>Screenshot</span>
+          </div>
+          <div class="project-content">
+            <h2>SkillSync</h2>
+            <p class="project-desc">A collaborative skill-trading platform where users match based on what they want to learn and teach.</p>
+            <div class="tech-list">
+              <span class="tech">React</span>
+              <span class="tech">Node.js</span>
+              <span class="tech">MongoDB</span>
+              <span class="tech">Socket.IO</span>
+              <span class="tech">Google Calendar API</span>
+            </div>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="project-card glass" data-project="../habit forge/index.html">
+          <div class="project-img-placeholder">
+            <span>Screenshot</span>
+          </div>
+          <div class="project-content">
+            <h2>HabitForge</h2>
+            <p class="project-desc">A gamified habit tracker with AI-powered feedback, streaks, and motivational challenges.</p>
+            <div class="tech-list">
+              <span class="tech">Next.js</span>
+              <span class="tech">Prisma</span>
+              <span class="tech">PostgreSQL</span>
+              <span class="tech">OpenAI API</span>
+              <span class="tech">Recharts</span>
+            </div>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="project-card glass" data-project="../devvault/index.html">
+          <div class="project-img-placeholder">
+            <span>Screenshot</span>
+          </div>
+          <div class="project-content">
+            <h2>DevVault</h2>
+            <p class="project-desc">A portfolio CMS where developers can sync projects from GitHub, customize layouts, and publish to subdomains.</p>
+            <div class="tech-list">
+              <span class="tech">Vue.js</span>
+              <span class="tech">Firebase</span>
+              <span class="tech">GitHub API</span>
+              <span class="tech">Vite</span>
+              <span class="tech">TailwindCSS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="skills-section">
+      <h1 class="section-title">Skills</h1>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Frontend</h3>
+          <div class="skill-tags">
+            <span class="skill-tag react">React</span>
+            <span class="skill-tag vue">Vue</span>
+            <span class="skill-tag next">Next.js</span>
+            <span class="skill-tag tailwind">Tailwind</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Backend</h3>
+          <div class="skill-tags">
+            <span class="skill-tag node">Node.js</span>
+            <span class="skill-tag express">Express</span>
+            <span class="skill-tag prisma">Prisma</span>
+            <span class="skill-tag postgres">PostgreSQL</span>
+            <span class="skill-tag mongo">MongoDB</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>DevOps</h3>
+          <div class="skill-tags">
+            <span class="skill-tag git">Git</span>
+            <span class="skill-tag docker">Docker</span>
+            <span class="skill-tag firebase">Firebase</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Tools</h3>
+          <div class="skill-tags">
+            <span class="skill-tag figma">Figma</span>
+            <span class="skill-tag postman">Postman</span>
+            <span class="skill-tag vscode">VS Code</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>APIs</h3>
+          <div class="skill-tags">
+            <span class="skill-tag openai">OpenAI</span>
+            <span class="skill-tag github">GitHub API</span>
+            <span class="skill-tag gcal">Google Calendar</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Modal Overlay for Project Preview -->
+  <div id="project-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-window glass">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html> 
