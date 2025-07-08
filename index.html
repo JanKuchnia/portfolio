@@ -422,22 +422,22 @@
         });
         
         // Form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // document.getElementById('contact-form').addEventListener('submit', function(e) {
+        //     e.preventDefault();
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+        //     const name = document.getElementById('name').value;
+        //     const email = document.getElementById('email').value;
+        //     const message = document.getElementById('message').value;
             
-            // Here you would typically send the form data to a server
-            console.log('Form submitted:', { name, email, message });
+        //     // Here you would typically send the form data to a server
+        //     console.log('Form submitted:', { name, email, message });
             
-            // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
+        //     // Show success message
+        //     alert('Thank you for your message! I will get back to you soon.');
             
-            // Reset form
-            this.reset();
-        });
+        //     // Reset form
+        //     this.reset();
+        // });
         
         // Animate elements when they come into view
         const observer = new IntersectionObserver((entries) => {
