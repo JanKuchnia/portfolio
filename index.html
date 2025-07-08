@@ -299,6 +299,17 @@
             from { opacity: 1; transform: scale(1) translateY(0); }
             to { opacity: 0; transform: scale(0.95) translateY(40px); }
         }
+        /* --- Dark mode skill pill color overrides --- */
+        .dark .bg-blue-50 { background-color: #1e293b !important; }
+        .dark .bg-green-50 { background-color: #193c2f !important; }
+        .dark .bg-yellow-50 { background-color: #3b3a1e !important; }
+        .dark .bg-purple-50 { background-color: #2a1e3b !important; }
+        .dark .bg-red-50 { background-color: #3b1e1e !important; }
+        .dark .text-blue-700 { color: #60a5fa !important; }
+        .dark .text-green-700 { color: #6ee7b7 !important; }
+        .dark .text-yellow-700 { color: #fde68a !important; }
+        .dark .text-purple-700 { color: #c4b5fd !important; }
+        .dark .text-red-700 { color: #fca5a5 !important; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -365,8 +376,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
                 <!-- Project 1 -->
                 <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp cursor-pointer" data-project="SkillSync/index.html">
-                    <div class="h-48 bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
-                        <i class="fas fa-users fa-4x text-blue-500 opacity-30"></i>
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black">
+                        <img src="zdjSkillSync.png" alt="SkillSync Preview" class="object-cover w-full h-full" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">SkillSync</h3>
@@ -383,8 +394,8 @@
                 
                 <!-- Project 2 -->
                 <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-100 cursor-pointer" data-project="HabitForge/index.html">
-                    <div class="h-48 bg-gradient-to-r from-green-100 to-blue-100 flex items-center justify-center">
-                        <i class="fas fa-trophy fa-4x text-green-500 opacity-30"></i>
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black">
+                        <img src="zdjHabitForge.png" alt="HabitForge Preview" class="object-cover w-full h-full" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">HabitForge</h3>
@@ -401,8 +412,8 @@
                 
                 <!-- Project 3 -->
                 <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-200 cursor-pointer" data-project="devvault/index.html">
-                    <div class="h-48 bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center">
-                        <i class="fas fa-code fa-4x text-purple-500 opacity-30"></i>
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black">
+                        <img src="zdjDevVault.png" alt="DevVault Preview" class="object-cover w-full h-full" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">DevVault</h3>
