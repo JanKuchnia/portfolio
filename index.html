@@ -117,6 +117,94 @@
         .delay-300 {
             animation-delay: 0.3s;
         }
+        /* --- Modal Styles Rework --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(20, 22, 34, 0.55);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-backdrop {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        .modal-window {
+            position: relative;
+            background: rgba(255,255,255,0.85);
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+            border: 1px solid rgba(255,255,255,0.18);
+            padding: 0;
+            max-width: 900px;
+            width: 90vw;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: modalIn 0.35s cubic-bezier(.4,2,.6,1) forwards;
+        }
+        @media (max-width: 600px) {
+            .modal-window {
+                max-width: 98vw;
+                width: 98vw;
+                max-height: 90vh;
+            }
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.7);
+            border: none;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 2rem;
+            color: #334155;
+            cursor: pointer;
+            z-index: 2;
+            transition: background 0.2s;
+        }
+        .modal-close:hover, .modal-close:focus {
+            background: rgba(59,130,246,0.15);
+            outline: 2px solid #3b82f6;
+        }
+        .modal-window iframe {
+            width: 100%;
+            height: 70vh;
+            border: none;
+            border-radius: 0 0 1.25rem 1.25rem;
+            background: #f8fafc;
+        }
+        @media (max-width: 600px) {
+            .modal-window iframe {
+                height: 55vh;
+            }
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(40px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes modalOut {
+            from { opacity: 1; transform: scale(1) translateY(0); }
+            to { opacity: 0; transform: scale(0.95) translateY(40px); }
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -321,11 +409,11 @@
     </section>
 
     <!-- Modal Overlay for Project Preview -->
-    <div id="project-modal" class="modal-overlay" style="display:none;" aria-modal="true" role="dialog" aria-labelledby="modal-title">
-        <div class="modal-backdrop"></div>
-        <div class="modal-window glass">
-            <button class="modal-close" aria-label="Close">&times;</button>
-            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen title="Project Preview"></iframe>
+    <div id="project-modal" class="modal-overlay" aria-modal="true" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-backdrop" tabindex="-1"></div>
+        <div class="modal-window glass" role="document">
+            <button class="modal-close" aria-label="Close" tabindex="0">&times;</button>
+            <iframe id="modal-iframe" src="" allowfullscreen title="Project Preview"></iframe>
         </div>
     </div>
 
@@ -436,29 +524,77 @@
             observer.observe(el);
         });
 
-        // Modal window logic for project previews (reworked)
+        // --- Modal window logic for project previews (reworked) ---
         const projectsGrid = document.getElementById('projects-grid');
         const modal = document.getElementById('project-modal');
         const modalIframe = document.getElementById('modal-iframe');
         const modalClose = document.querySelector('.modal-close');
         const modalBackdrop = document.querySelector('.modal-backdrop');
+        const modalWindow = document.querySelector('.modal-window');
         let lastFocusedElement = null;
+        let focusableEls = [];
+        let firstFocusableEl, lastFocusableEl;
+        let scrollPosition = 0;
+
+        // Helper: Trap focus inside modal
+        function trapFocus(e) {
+            if (!modal.classList.contains('active')) return;
+            if (e.key !== 'Tab') return;
+            if (focusableEls.length === 0) return;
+            if (e.shiftKey) {
+                if (document.activeElement === firstFocusableEl) {
+                    e.preventDefault();
+                    lastFocusableEl.focus();
+                }
+            } else {
+                if (document.activeElement === lastFocusableEl) {
+                    e.preventDefault();
+                    firstFocusableEl.focus();
+                }
+            }
+        }
+
+        // Helper: Lock background scroll
+        function lockScroll() {
+            scrollPosition = window.scrollY;
+            document.body.style.top = `-${scrollPosition}px`;
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+        }
+        function unlockScroll() {
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            window.scrollTo(0, scrollPosition);
+        }
 
         // Open modal helper
         function openModal(src) {
             if (!src) return;
             lastFocusedElement = document.activeElement;
             modalIframe.src = src;
-            modal.style.display = 'block';
+            modal.classList.add('active');
             modal.setAttribute('aria-hidden', 'false');
-            modalClose.focus();
+            lockScroll();
+            // Focus trap setup
+            setTimeout(() => {
+                focusableEls = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"]), iframe');
+                firstFocusableEl = focusableEls[0];
+                lastFocusableEl = focusableEls[focusableEls.length - 1];
+                modalClose.focus();
+            }, 50);
         }
         // Close modal helper
         function closeModal() {
-            modal.style.display = 'none';
-            modalIframe.src = '';
+            modal.classList.remove('active');
             modal.setAttribute('aria-hidden', 'true');
-            if (lastFocusedElement) lastFocusedElement.focus();
+            modalWindow.style.animation = 'modalOut 0.25s cubic-bezier(.4,2,.6,1) forwards';
+            setTimeout(() => {
+                modalIframe.src = '';
+                modalWindow.style.animation = '';
+                unlockScroll();
+                if (lastFocusedElement) lastFocusedElement.focus();
+            }, 220);
         }
         // Event delegation for click
         projectsGrid.addEventListener('click', function(e) {
@@ -482,11 +618,19 @@
         // Close modal on close button or backdrop
         modalClose.addEventListener('click', closeModal);
         modalBackdrop.addEventListener('click', closeModal);
-        // Close modal on Escape key
+        // Close modal on Escape key and trap focus
         document.addEventListener('keydown', function(e) {
-            if (modal.style.display === 'block' && e.key === 'Escape') {
-                closeModal();
+            if (modal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else {
+                    trapFocus(e);
+                }
             }
+        });
+        // Prevent click inside modal window from closing
+        modalWindow.addEventListener('click', function(e) {
+            e.stopPropagation();
         });
     </script>
 </body>
