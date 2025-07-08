@@ -319,49 +319,16 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-r from-blue-50 to-purple-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-2">Get In <span class="gradient-text">Touch</span></h2>
-                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"></div>
-            </div>
-            
-            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-                <div class="p-8">
-                    <form id="contact-form">
-                        <div class="mb-6">
-                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                        </div>
-                        <div class="mb-6">
-                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                        </div>
-                        <div class="mb-6">
-                            <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Message</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300">Send Message</button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="flex justify-center mt-12 space-x-6">
-                <a href="#" class="text-slate-700 hover:text-blue-500 transition-colors duration-300">
-                    <i class="fab fa-github fa-2x"></i>
-                </a>
-                <a href="#" class="text-slate-700 hover:text-blue-400 transition-colors duration-300">
-                    <i class="fab fa-linkedin fa-2x"></i>
-                </a>
-                <a href="#" class="text-slate-700 hover:text-red-500 transition-colors duration-300">
-                    <i class="fab fa-twitter fa-2x"></i>
-                </a>
-                <a href="#" class="text-slate-700 hover:text-blue-600 transition-colors duration-300">
-                    <i class="fab fa-facebook fa-2x"></i>
-                </a>
-            </div>
+    <!-- Removed Get In Touch section as requested -->
+
+    <!-- Modal Overlay for Project Preview -->
+    <div id="project-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-window glass">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-slate-900 text-white py-8">
@@ -486,6 +453,28 @@
         
         document.querySelectorAll('.project-card, .animate-fadeInUp').forEach(el => {
             observer.observe(el);
+        });
+
+        // Modal window logic for project previews
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // You can set the src based on project, here is a placeholder
+                let projectName = card.querySelector('h3')?.textContent?.trim() || '';
+                let src = '';
+                if (projectName === 'SkillSync') src = 'SkillSync/index.html';
+                else if (projectName === 'HabitForge') src = 'HabitForge/index.html';
+                else if (projectName === 'DevVault') src = 'devvault/index.html';
+                document.getElementById('modal-iframe').src = src;
+                document.getElementById('project-modal').style.display = 'block';
+            });
+        });
+        document.querySelector('.modal-close').addEventListener('click', function() {
+            document.getElementById('project-modal').style.display = 'none';
+            document.getElementById('modal-iframe').src = '';
+        });
+        document.querySelector('.modal-backdrop').addEventListener('click', function() {
+            document.getElementById('project-modal').style.display = 'none';
+            document.getElementById('modal-iframe').src = '';
         });
     </script>
 </body>
