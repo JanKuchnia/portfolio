@@ -170,7 +170,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1 -->
-                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp">
+                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp" data-project="SkillSync/index.html">
                     <div class="h-48 bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
                         <i class="fas fa-users fa-4x text-blue-500 opacity-30"></i>
                     </div>
@@ -188,7 +188,7 @@
                 </div>
                 
                 <!-- Project 2 -->
-                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-100">
+                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-100" data-project="HabitForge/index.html">
                     <div class="h-48 bg-gradient-to-r from-green-100 to-blue-100 flex items-center justify-center">
                         <i class="fas fa-trophy fa-4x text-green-500 opacity-30"></i>
                     </div>
@@ -206,7 +206,7 @@
                 </div>
                 
                 <!-- Project 3 -->
-                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-200">
+                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-200" data-project="devvault/index.html">
                     <div class="h-48 bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center">
                         <i class="fas fa-code fa-4x text-purple-500 opacity-30"></i>
                     </div>
@@ -315,9 +315,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
-    <!-- Removed Get In Touch section as requested -->
 
     <!-- Modal Overlay for Project Preview -->
     <div id="project-modal" class="modal-overlay" style="display:none;">
@@ -456,12 +453,7 @@
         // Modal window logic for project previews
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('click', function() {
-                // You can set the src based on project, here is a placeholder
-                let projectName = card.querySelector('h3')?.textContent?.trim() || '';
-                let src = '';
-                if (projectName === 'SkillSync') src = 'SkillSync/index.html';
-                else if (projectName === 'HabitForge') src = 'HabitForge/index.html';
-                else if (projectName === 'DevVault') src = 'devvault/index.html';
+                let src = card.getAttribute('data-project');
                 document.getElementById('modal-iframe').src = src;
                 document.getElementById('project-modal').style.display = 'block';
             });
