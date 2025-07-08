@@ -1,129 +1,492 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fullstack Developer Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullstack Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .dark {
+            color-scheme: dark;
+        }
+        
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dark body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        .dark .bg-white {
+            background-color: #1e293b;
+        }
+        
+        .dark .bg-slate-50 {
+            background-color: #1e293b;
+        }
+        
+        .dark .text-slate-600 {
+            color: #94a3b8;
+        }
+        
+        .dark .border-slate-300 {
+            border-color: #334155;
+        }
+        
+        .dark .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .skill-pill:hover {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            color: white;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active::after {
+            width: 100%;
+        }
+        
+        /* Animation for project cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+    </style>
 </head>
-<body>
-  <main class="container">
-    <section class="projects-section">
-      <h1 class="section-title">Featured Projects</h1>
-      <div class="projects-grid">
-        <!-- Project 1 -->
-        <div class="project-card glass" data-project="SkillSync/index.html">
-          <div class="project-img-placeholder">
-            <span>Screenshot</span>
-          </div>
-          <div class="project-content">
-            <h2>SkillSync</h2>
-            <p class="project-desc">A collaborative skill-trading platform where users match based on what they want to learn and teach.</p>
-            <div class="tech-list">
-              <span class="tech">React</span>
-              <span class="tech">Node.js</span>
-              <span class="tech">MongoDB</span>
-              <span class="tech">Socket.IO</span>
-              <span class="tech">Google Calendar API</span>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold gradient-text">Portfolio</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#projects" class="nav-link text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white font-medium">Projects</a>
+                    <a href="#skills" class="nav-link text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white font-medium">Skills</a>
+                    <a href="#contact" class="nav-link text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white font-medium">Contact</a>
+                    <button id="theme-toggle" class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
+                        <i id="theme-icon" class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-slate-700 hover:text-slate-900">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
-        <!-- Project 2 -->
-        <div class="project-card glass" data-project="HabitForge/index.html">
-          <div class="project-img-placeholder">
-            <span>Screenshot</span>
-          </div>
-          <div class="project-content">
-            <h2>HabitForge</h2>
-            <p class="project-desc">A gamified habit tracker with AI-powered feedback, streaks, and motivational challenges.</p>
-            <div class="tech-list">
-              <span class="tech">Next.js</span>
-              <span class="tech">Prisma</span>
-              <span class="tech">PostgreSQL</span>
-              <span class="tech">OpenAI API</span>
-              <span class="tech">Recharts</span>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Projects</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Skills</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100">Contact</a>
             </div>
-          </div>
         </div>
-        <!-- Project 3 -->
-        <div class="project-card glass" data-project="devvault/index.html">
-          <div class="project-img-placeholder">
-            <span>Screenshot</span>
-          </div>
-          <div class="project-content">
-            <h2>DevVault</h2>
-            <p class="project-desc">A portfolio CMS where developers can sync projects from GitHub, customize layouts, and publish to subdomains.</p>
-            <div class="tech-list">
-              <span class="tech">Vue.js</span>
-              <span class="tech">Firebase</span>
-              <span class="tech">GitHub API</span>
-              <span class="tech">Vite</span>
-              <span class="tech">TailwindCSS</span>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="py-20 bg-gradient-to-r from-blue-50 to-purple-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Hi, I'm a <span class="gradient-text">Fullstack Developer</span></h1>
+                <p class="text-xl text-slate-600 max-w-2xl mx-auto">I build modern web applications with clean code and intuitive user experiences.</p>
+                <div class="mt-8">
+                    <a href="#projects" class="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300">View My Work</a>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </header>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-2">Featured <span class="gradient-text">Projects</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp">
+                    <div class="h-48 bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
+                        <i class="fas fa-users fa-4x text-blue-500 opacity-30"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">SkillSync</h3>
+                        <p class="text-slate-600 mb-4">A collaborative skill-trading platform where users match based on what they want to learn and teach.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">React</span>
+                            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Node.js</span>
+                            <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">MongoDB</span>
+                            <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Socket.IO</span>
+                            <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Google Calendar API</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-100">
+                    <div class="h-48 bg-gradient-to-r from-green-100 to-blue-100 flex items-center justify-center">
+                        <i class="fas fa-trophy fa-4x text-green-500 opacity-30"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">HabitForge</h3>
+                        <p class="text-slate-600 mb-4">A gamified habit tracker with AI-powered feedback, streaks, and motivational challenges.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Next.js</span>
+                            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Prisma</span>
+                            <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">PostgreSQL</span>
+                            <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">OpenAI API</span>
+                            <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Recharts</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-200">
+                    <div class="h-48 bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center">
+                        <i class="fas fa-code fa-4x text-purple-500 opacity-30"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">DevVault</h3>
+                        <p class="text-slate-600 mb-4">A portfolio CMS where developers can sync projects from GitHub, customize layouts, and publish to subdomains.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Vue.js</span>
+                            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Firebase</span>
+                            <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">GitHub API</span>
+                            <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Vite</span>
+                            <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">TailwindCSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    <section class="skills-section">
-      <h1 class="section-title">Skills</h1>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <h3>Frontend</h3>
-          <div class="skill-tags">
-            <span class="skill-tag react">React</span>
-            <span class="skill-tag vue">Vue</span>
-            <span class="skill-tag next">Next.js</span>
-            <span class="skill-tag tailwind">Tailwind</span>
-          </div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-2">My <span class="gradient-text">Skills</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend Skills -->
+                <div class="bg-white p-6 rounded-xl shadow-md animate-fadeInUp">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-laptop-code text-blue-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Frontend</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-pill bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">React</span>
+                        <span class="skill-pill bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Vue</span>
+                        <span class="skill-pill bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Next.js</span>
+                        <span class="skill-pill bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Tailwind</span>
+                    </div>
+                </div>
+                
+                <!-- Backend Skills -->
+                <div class="bg-white p-6 rounded-xl shadow-md animate-fadeInUp delay-100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-server text-green-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Backend</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-pill bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Node.js</span>
+                        <span class="skill-pill bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Express</span>
+                        <span class="skill-pill bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Prisma</span>
+                        <span class="skill-pill bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">PostgreSQL</span>
+                        <span class="skill-pill bg-red-50 text-red-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">MongoDB</span>
+                    </div>
+                </div>
+                
+                <!-- DevOps Skills -->
+                <div class="bg-white p-6 rounded-xl shadow-md animate-fadeInUp delay-200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-cloud text-purple-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">DevOps</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-pill bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Git</span>
+                        <span class="skill-pill bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Docker</span>
+                        <span class="skill-pill bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Firebase</span>
+                    </div>
+                </div>
+                
+                <!-- Tools -->
+                <div class="bg-white p-6 rounded-xl shadow-md animate-fadeInUp">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-tools text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-pill bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Figma</span>
+                        <span class="skill-pill bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Postman</span>
+                        <span class="skill-pill bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">VS Code</span>
+                    </div>
+                </div>
+                
+                <!-- APIs -->
+                <div class="bg-white p-6 rounded-xl shadow-md animate-fadeInUp delay-100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-plug text-red-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">APIs</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-pill bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">OpenAI</span>
+                        <span class="skill-pill bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">GitHub API</span>
+                        <span class="skill-pill bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-300">Google Calendar</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="skill-group">
-          <h3>Backend</h3>
-          <div class="skill-tags">
-            <span class="skill-tag node">Node.js</span>
-            <span class="skill-tag express">Express</span>
-            <span class="skill-tag prisma">Prisma</span>
-            <span class="skill-tag postgres">PostgreSQL</span>
-            <span class="skill-tag mongo">MongoDB</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3>DevOps</h3>
-          <div class="skill-tags">
-            <span class="skill-tag git">Git</span>
-            <span class="skill-tag docker">Docker</span>
-            <span class="skill-tag firebase">Firebase</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3>Tools</h3>
-          <div class="skill-tags">
-            <span class="skill-tag figma">Figma</span>
-            <span class="skill-tag postman">Postman</span>
-            <span class="skill-tag vscode">VS Code</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3>APIs</h3>
-          <div class="skill-tags">
-            <span class="skill-tag openai">OpenAI</span>
-            <span class="skill-tag github">GitHub API</span>
-            <span class="skill-tag gcal">Google Calendar</span>
-          </div>
-        </div>
-      </div>
     </section>
-  </main>
-  <!-- Modal Overlay for Project Preview -->
-  <div id="project-modal" class="modal-overlay" style="display:none;">
-    <div class="modal-backdrop"></div>
-    <div class="modal-window glass">
-      <button class="modal-close" aria-label="Close">&times;</button>
-      <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
-  <script src="script.js"></script>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-r from-blue-50 to-purple-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-2">Get In <span class="gradient-text">Touch</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <form id="contact-form">
+                        <div class="mb-6">
+                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-12 space-x-6">
+                <a href="#" class="text-slate-700 hover:text-blue-500 transition-colors duration-300">
+                    <i class="fab fa-github fa-2x"></i>
+                </a>
+                <a href="#" class="text-slate-700 hover:text-blue-400 transition-colors duration-300">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+                <a href="#" class="text-slate-700 hover:text-red-500 transition-colors duration-300">
+                    <i class="fab fa-twitter fa-2x"></i>
+                </a>
+                <a href="#" class="text-slate-700 hover:text-blue-600 transition-colors duration-300">
+                    <i class="fab fa-facebook fa-2x"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold gradient-text">Portfolio</span>
+                </div>
+                <div class="text-sm text-slate-400">
+                    &copy; 2023 Fullstack Developer Portfolio. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Check for saved theme preference or use system preference
+        const currentTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            if (isDark) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Mobile menu toggle
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Highlight active nav link on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= sectionTop - 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send the form data to a server
+            console.log('Form submitted:', { name, email, message });
+            
+            // Show success message
+            alert('Thank you for your message! I will get back to you soon.');
+            
+            // Reset form
+            this.reset();
+        });
+        
+        // Animate elements when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.project-card, .animate-fadeInUp').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html> 
