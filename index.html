@@ -8,6 +8,110 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f6fb;
+            color: #1e293b;
+            transition: background 0.4s, color 0.4s;
+        }
+        .dark body {
+            background: linear-gradient(135deg, #0a0f1a 0%, #1a2233 100%);
+            color: #e5e7eb;
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.7);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 1.25rem;
+            border: 1.5px solid rgba(255,255,255,0.18);
+        }
+        .dark .glass-card {
+            background: rgba(20, 24, 38, 0.7);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+            border: 1.5px solid rgba(80,80,120,0.18);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .project-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -5px rgba(59,130,246,0.10), 0 10px 20px -5px rgba(139,92,246,0.08);
+            border-color: #8b5cf6;
+        }
+        .dark .project-card:hover {
+            box-shadow: 0 20px 40px -5px rgba(59,130,246,0.18), 0 10px 20px -5px rgba(139,92,246,0.15);
+            border-color: #3b82f6;
+        }
+        .skill-pill, .project-card span {
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .skill-pill:hover {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            color: #fff;
+            box-shadow: 0 2px 8px 0 rgba(59,130,246,0.10);
+        }
+        .dark .skill-pill:hover {
+            background: linear-gradient(90deg, #6366f1, #a78bfa);
+            color: #fff;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.2s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .active::after {
+            width: 100%;
+        }
+        .theme-toggle-anim {
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.3s;
+            border-radius: 50%;
+            padding: 0.5rem;
+        }
+        .theme-toggle-anim:hover, .theme-toggle-anim:focus {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            color: #fff !important;
+            box-shadow: 0 2px 8px 0 rgba(59,130,246,0.10);
+            transform: rotate(20deg) scale(1.1);
+        }
+        /* Animation for project cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+    </style>
 </head>
 <body>
   <main class="container">
@@ -15,7 +119,7 @@
       <h1 class="section-title">Featured Projects</h1>
       <div class="projects-grid">
         <!-- Project 1 -->
-        <div class="project-card glass" data-project="SkillSync/index.html">
+        <div class="project-card glass-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp">
           <div class="project-img-placeholder">
             <span>Screenshot</span>
           </div>
@@ -32,7 +136,7 @@
           </div>
         </div>
         <!-- Project 2 -->
-        <div class="project-card glass" data-project="HabitForge/index.html">
+        <div class="project-card glass-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-100">
           <div class="project-img-placeholder">
             <span>Screenshot</span>
           </div>
@@ -49,7 +153,7 @@
           </div>
         </div>
         <!-- Project 3 -->
-        <div class="project-card glass" data-project="devvault/index.html">
+        <div class="project-card glass-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-200">
           <div class="project-img-placeholder">
             <span>Screenshot</span>
           </div>
