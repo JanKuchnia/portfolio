@@ -22,13 +22,13 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #e5eaf3;
+            background-color: #c7c8c9;
             color: #273043;
             transition: background-color 0.3s, color 0.3s;
             position: relative;
             display: block;
             min-height: 100vh;
-            background: linear-gradient(135deg, #e5eaf3 0%, #f1f5fa 100%);
+            background: linear-gradient(135deg, #c7c8c9 0%, #ede9fe 100%);
         }
         
         .dark body {
@@ -44,7 +44,7 @@
             background-color: #232b3b;
         }
         .bg-slate-50 {
-            background-color: #e5eaf3;
+            background-color: #c7c8c9;
             transition: background-color 0.3s;
         }
         .dark .bg-slate-50 {
@@ -376,8 +376,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
                 <!-- Project 1 -->
                 <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp cursor-pointer" data-project="SkillSync/index.html">
-                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black">
-                        <img src="zdjSkillSync.png" alt="SkillSync Preview" class="object-cover w-full h-full" />
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black border-b border-gray-200">
+                        <img src="zdjSkillSync.png" alt="SkillSync Preview" class="object-cover w-full h-full shadow-md" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">SkillSync</h3>
@@ -394,8 +394,8 @@
                 
                 <!-- Project 2 -->
                 <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-100 cursor-pointer" data-project="HabitForge/index.html">
-                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black">
-                        <img src="zdjHabitForge.png" alt="HabitForge Preview" class="object-cover w-full h-full" />
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black border-b border-gray-200">
+                        <img src="zdjHabitForge.png" alt="HabitForge Preview" class="object-cover w-full h-full shadow-md" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">HabitForge</h3>
@@ -412,8 +412,8 @@
                 
                 <!-- Project 3 -->
                 <div class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp delay-200 cursor-pointer" data-project="devvault/index.html">
-                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black">
-                        <img src="zdjDevVault.png" alt="DevVault Preview" class="object-cover w-full h-full" />
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black border-b border-gray-200">
+                        <img src="zdjDevVault.png" alt="DevVault Preview" class="object-cover w-full h-full shadow-md" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">DevVault</h3>
@@ -427,6 +427,28 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jeden z naszych klientów Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">Jeden z naszych klientów</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"></div>
+            </div>
+            <div class="flex justify-center">
+                <a href="https://tssplytki.com" target="_blank" rel="noopener noreferrer" class="project-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 animate-fadeInUp cursor-pointer max-w-sm w-full hover:shadow-lg">
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black border-b border-gray-200">
+                        <img src="zdjTssPlytki.png" alt="Podgląd strony tssplytki.com" class="object-cover w-full h-full shadow-md" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">TSS Płytki</h3>
+                        <p class="text-slate-600 mb-4">Zobacz stronę jednego z naszych klientów</p>
+                        <span class="text-indigo-600 font-medium">tssplytki.com</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
